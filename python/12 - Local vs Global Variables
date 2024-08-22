@@ -1,0 +1,14 @@
+#!/bin/python3
+
+def my_function():
+    """This is a sample function.
+    We're going to declare a variable in this function.
+    """
+
+    message = "Hello everyone!"
+    print(message)
+
+my_function()
+
+print(message)
+# this is going to fail because we defined the "message" within the function, it is not defined outside the function.

@@ -1,0 +1,15 @@
+#!/bin/python3
+
+age = input ("Enter your age:\n")
+print("You are " + age + " years old")
+
+# age2 = age + 50
+# Print("In 50 years, you will be " + age2 + "years old.")
+
+# Notice the error while creating age2.
+# We need to convert "age" input from a string to an integer.
+
+age2 = int(age) + 50
+print("In 50 years, you will be " + str(age2) + " years old.")
+
+# If user inputs something else than a number, this program crashes. Will learn later.

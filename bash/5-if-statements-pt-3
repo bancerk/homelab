@@ -1,0 +1,14 @@
+#!/bin/bash
+
+command=btop
+
+if command -v $command
+# command -v checks if the program is installed
+then
+    echo "$command is available, let's run it..."
+else
+    echo "$command is NOT available, installing it..."
+    #yay -Syu $command -y
+fi
+
+$command

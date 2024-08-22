@@ -1,0 +1,20 @@
+#!/bin/python3
+
+print("Enter your name:")
+name = input()
+print(name)
+
+# Less is more! Observe difference.
+
+name = input("Enter your name: ")
+print(name)
+
+# Add a Line breaker if you want.
+
+name = input("Enter your name:\n")
+print(name)
+
+# You can add more stuff to print.
+
+name = input("Enter your name: ")
+print("Your name is " + name)

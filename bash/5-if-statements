@@ -1,0 +1,18 @@
+#!/bin/bash
+
+mynum=200
+
+if [ ! $mynum -eq 200 ]
+# ! reverses the equation
+then
+    echo "The condition is true"
+else
+    echo "The variable does not equal to 200"
+fi
+
+# -eq equals
+# -ne not equal
+# -gt greater than
+# man test for more args
+# using brackets
+# causes bash to run another command, test, in the background
