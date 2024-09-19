@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# using what we have learned so far
+
+release_file=/etc/os-release
+
+if [ -d /etc/pacman.d ] && grep -q "Arch" $release_file;
+# && both statements need to be true (AND gate logic)
+
+then
+    sudo pacman -Syu
+    # the host is Archlinux based
+fi
+
+if [ -d /etc/apt ] || grep -q "Debian" $release_file;
+# || either one of the statements need to be true (OR gate logic)
+
+then
+    sudo apt update
+    sudo apt dist-upgrade
+    # the host is Debian based
+fi
