@@ -1,0 +1,11 @@
+#!/bin/bash
+
+myvar=1
+
+while [ -f ~/testfile ]; # -f flag tests for files
+do
+    echo "As of $(date), the test file exists."
+    sleep 1
+done
+
+echo "As of $(date), the test file no longer exist."

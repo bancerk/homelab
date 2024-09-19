@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# while loops are used for continually doing smth until a condition is met
+
+myvar=1
+
+while [ $myvar -le 10 ]; # test if myvar is less than or equal to 10
+do
+    echo $myvar
+    myvar=$(( $myvar +1))
+    sleep 0.5
+done
+
+# this example script count from 1 to 10 and then stops
