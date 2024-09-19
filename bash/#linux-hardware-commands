@@ -13,5 +13,8 @@ self explanatory at this point
 lsblk
 bulk storage devices
 
-hwinfo
+hwinfo (may not be pre-installed)
 better to pipe this into a text file, huge info dump
+
+inxi -Fxz
+detailed hardware information
