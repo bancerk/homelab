@@ -1,7 +1,0 @@
-#!/bin/bash
-
-echo $XDG_SESSION_TYPE
-
-# or
-
-env | grep "TYPE"

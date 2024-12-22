@@ -1,0 +1,22 @@
+sudo mv update.sh /usr/local/bin/update
+
+#   moves "update.sh" script to local universal system binary repository, aka "/usr/local/bin" and renames file to "update"
+#   this allows the script to be run from any directory in the terminal by simply typing "update" and pressing enter
+
+sudo chown root:root /usr/local/bin/update
+
+#   changes ownership of the script to root user and root group, so that any user can run the script with elevated permissions
+
+#   alternatively, instead of moving the script to "/usr/local/bin", you can add the directory containing the script to the PATH environment variable
+#   to do this, add the following line to your ~/.bashrc file:
+#   export PATH=$PATH:/path/to/directory
+#   replace "/path/to/directory" with the actual path to the directory containing the script
+#   then run the following command to apply the changes:
+#   source ~/.bashrc
+#   this will allow you to run the script from any directory by simply typing the script name and pressing enter
+
+#   or as an another alternative, you can create a symbolic link to the script in the "/usr/local/bin" directory
+#   to do this, run the following command:
+#   sudo ln -s /path/to/script /usr/local/bin/scriptname
+#   replace "/path/to/script" with the actual path to the script and "scriptname" with the desired name of the script
+#   this will create a symbolic link to the script in the "/usr/local/bin" directory, allowing you to run the script from any directory by typing the script name and pressing enter

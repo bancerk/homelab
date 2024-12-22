@@ -1,0 +1,77 @@
+#   stdin, stdout, stderr
+
+ls /notexist
+echo $?
+#   Exit status of last command
+#   echo output: 2 this means output is stanrd error aka stderr
+
+echo "Hello World"
+#   echo output: Hello World 
+#   this means output is standard output aka stdout
+echo $?
+#   echo output: 0 this means output is standard output aka stdout
+
+#   Examples:
+
+find /etc -type f
+#   find output: every "file" in /etc
+#   some files are not readable by user, so find will output "Permission denied" for those files, this is standard error aka stderr
+
+find /etc -type f 2>/dev/null
+#   "Permission denied" will not be displayed, because we redirected stderr to /dev/null, effectively hiding error messages, this does not mean that error is not there, it is just not displayed
+
+find /etc -type f > /dev/null
+#   find output: only "Permission denied" messages, because we redirected stdout to /dev/null, effectively hiding normal output, this does not mean that output is not there, it is just not displayed
+
+find /etc -type f 1> /dev/null
+#  same as above, 1 is default file descriptor for stdout, if not specified, 1 is assumed
+
+find /etc -type f &> /dev/null
+#  find output: no output, because both stdout and stderr are redirected to /dev/null
+
+find /etc -type f 2>&1 > /dev/null
+#  find output: same as above, because we first redirected stderr to stdout, and then redirected stdout to /dev/null
+
+find /etc -type f 1>find_results.txt 2>find_errors.txt
+#  find output: no output on termimal, but normal output is sent to a file named "find_results.txt", and "error messages output is sent to a file named "find_errors.txt"
+#  if you want to append to file instead of overwriting, use ">>" instead of ">"
+#  this kind of script is very commonly used in real world, when you want to log errors and normal output separately
+
+
+
+
+# Example 2, let's apply this to our update script on lesson 8
+
+#!/bin/bash
+
+release_file=/etc/os-release
+logfile=/var/log/updater.log
+errorlog=/var/log/updater_errors.log
+
+if [ -d /etc/pacman.d ] && grep -q "Arch" $release_file;
+# && both statements need to be true (AND gate logic)
+
+then
+    sudo pacman -Syu 1>>$logfile 2>>$errorlog
+    # the host is Archlinux based
+    if [ $? -ne 0 ];
+    then
+        echo "An error occured, please check $errorlog file."
+    fi
+fi
+
+if [ -d /etc/apt ] || grep -q "Debian" $release_file;
+# || either one of the statements need to be true (OR gate logic)
+
+then
+    sudo apt update
+    sudo apt dist-upgrade -y 1>>$logfile 2>>$errorlog
+    # the host is Debian based
+        if [ $? -ne 0 ];
+    then
+        echo "An error occured, please check $errorlog file."
+    fi
+fi
+
+#   "tail -f /var/log/updater.log" command will show the progress of the update script
+#   "tail -f /var/log/updater_errors.log" command will show the errors of the update script

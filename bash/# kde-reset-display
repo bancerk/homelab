@@ -3,3 +3,5 @@
 kquitapp5 plasmashell
 sleep 2
 kstart5 plasmashell
+
+#   This script restarts the KDE Plasma shell by killing the current instance and starting a new one

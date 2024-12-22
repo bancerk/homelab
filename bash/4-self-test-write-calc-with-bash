@@ -26,8 +26,8 @@ read -p "Continue? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][e
 
 expr $num1 $exprtype $num2
 
-#what i learned:
-#calling for user input and calling for user confirmation
-#They were more complicated than I initially thought
+#   what i learned:
+#   calling for user input and calling for user confirmation
+#   They were more complicated than I initially thought
 
-#still can't do multiplications
+#   still can't do multiplications

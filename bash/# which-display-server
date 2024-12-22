@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo $XDG_SESSION_TYPE
+
+# or
+
+env | grep "TYPE"
+
+#   This script prints the type of display server being used in the current session
