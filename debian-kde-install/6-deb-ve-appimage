@@ -1,0 +1,4 @@
+iriun webcam - deb pkg
+
+Rustdesk - appimage
+$ sudo systemctl disable rustdesk
