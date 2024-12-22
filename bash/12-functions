@@ -1,0 +1,68 @@
+#   let's introduce functions to our previous update script:
+
+sudo nano /usr/local/bin/update:
+
+#!/bin/bash
+
+release_file=/etc/os-release
+logfile=/var/log/updater.log
+errorlog=/var/log/updater_errors.log
+
+if [ -d /etc/pacman.d ] && grep -q "Arch" $release_file;
+
+then
+    sudo pacman -Syu 1>>$logfile 2>>$errorlog
+    if [ $? -ne 0 ];
+    then
+        echo "An error occured, please check $errorlog file."
+    fi
+fi
+
+if [ -d /etc/apt ] || grep -q "Debian" $release_file;
+
+then
+    sudo apt update
+    sudo apt dist-upgrade -y 1>>$logfile 2>>$errorlog
+    if [ $? -ne 0 ];
+    then
+        echo "An error occured, please check $errorlog file."
+    fi
+fi
+
+#   Notice we are repeating ourselves several times in this script, let's refactor it using functions
+
+
+
+
+#!/bin/bash
+
+release_file=/etc/os-release
+logfile=/var/log/updater.log
+errorlog=/var/log/updater_errors.log
+
+check_exit_status() {
+    if [ $? -ne 0 ];
+    then
+        echo "An error occured, please check $errorlog file."
+    fi
+}
+#   this is our first function, let's call it from here in the script instead of repeating the same code
+#   we can call this function from anywhere in the script, and it will execute the code inside it
+#   this also enables us to change the code in one place, and it will be reflected everywhere in the script
+
+if [ -d /etc/pacman.d ] && grep -q "Arch" $release_file;
+
+then
+    sudo pacman -Syu 1>>$logfile 2>>$errorlog
+    check_exit_status
+    #   we are calling our function here
+fi
+
+if [ -d /etc/apt ] || grep -q "Debian" $release_file;
+
+then
+    sudo apt update
+    sudo apt dist-upgrade -y 1>>$logfile 2>>$errorlog
+    check_exit_status
+    #   we are calling our function here again
+fi

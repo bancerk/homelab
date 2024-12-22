@@ -1,0 +1,20 @@
+#!bin/bash
+
+#   a script  to list the top 10 processes consuming the most memory on a system
+
+list_ram_hogs() {
+
+    ps aux --sort=-%mem | awk 'NR==1 || NR<=11 {printf "%-10s %-10s %-10s %-10s %-50s\n", $1, $2, $3, $4, $11}'
+    #   the NR==1 || NR<=11 is a way to print the first line (aka coloumn names) and then the next 10 lines (aka the top 10 offending processes)
+}
+
+list_ram_hogs
+
+#   this doesn't need to be a function, but it's a good example of how to use awk to format output
+#   let's make this a true function by having it refresh every few seconds
+
+while true; do
+    clear
+    list_ram_hogs
+    sleep 15
+done

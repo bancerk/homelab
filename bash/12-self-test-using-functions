@@ -1,0 +1,11 @@
+#!bin/bash
+
+#  a script to display the current CPU usage
+
+get_cpu_usage() {
+
+    top -bn1 | grep "Cpu(s)" | awk '{usage=100-$8} END {print usage "%"}'
+    #  the -bn1 flag is used to run top in batch mode and only display one iteration of the output
+}
+
+echo "Current CPU usage is: $(get_cpu_usage)"

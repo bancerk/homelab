@@ -1,0 +1,119 @@
+#!bin/bash
+
+#   a script for a random password generator that interacts with the user to determine the desired password length and allowed character sets (e.g., letters, numbers, special characters).
+
+#   Function to generate random password
+
+pass_gen() {
+
+    local length="$1"
+    local use_upper="$2"
+    local use_lower="$3"
+    local use_numbers="$4"
+    local use_special="$5"
+
+    # Get user input
+    read -p "Enter desired password length: " length
+    read -p "Include uppercase letters? (y/n): " use_upper
+    read -p "Include lowercase letters? (y/n): " use_lower
+    read -p "Include numbers? (y/n): " use_numbers
+    read -p "Include special characters? (y/n): " use_special
+
+    local char_set=""
+
+    # Defining the character set based on user input
+    [ "$use_upper" == "y" ] && char_set+="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    [ "$use_lower" == "y" ] && char_set+="abcdefghijklmnopqrstuvwxyz"
+    [ "$use_numbers" == "y" ] && char_set+="0123456789"
+    [ "$use_special" == "y" ] && char_set+="!@#$%^&*()-_=+[]{}|;:,.<>?/"
+
+    # Validate password character length
+    if ! [[ "$length" =~ ^[0-9]+$ ]] || [ "$length" -le 0 ]; then
+    echo "Invalid password length. Please enter a positive number."
+    exit 1
+    fi
+
+    # Ensure character set is not empty
+    if [ -z "$char_set" ]; then
+        echo "No character sets selected! Cannot generate a password."
+        return 1
+    fi
+
+    # Generating the password
+    password=""
+    for _ in $(seq 1 "$length"); do
+        password+="${char_set:RANDOM%${#char_set}:1}"
+    done
+
+    echo "Generated Password: $password"
+}
+
+# run the function based on user preferences to generate a password
+pass_gen "$length" "$use_upper" "$use_lower" "$use_numbers" "$use_special"
+
+
+
+
+#   what i learned from this exercise:
+#   user input is required to be before the defining a character set, otherwise the character set will be empty and function breaks
+
+
+
+
+
+ENHANCE LEARNING!:
+
+ #  asked chatgpt if this function could be called truely random:
+
+
+ #  The password generator in the script relies on Bash's `$RANDOM` variable to select random characters from a character set. While it can produce a password that seems random, **it is not truly random** in the cryptographic sense. Here's why:
+
+
+
+### Characteristics of `$RANDOM`:
+#1. **Pseudo-Randomness**:
+#  - `$RANDOM` generates pseudo-random numbers, which means they are determined by an algorithm and are not truly unpredictable. Given the same seed, `$RANDOM` will produce the same sequence of numbers.
+   
+#2. **Limited Entropy**:
+#   - The randomness of `$RANDOM` is limited to 16-bit integers, so it doesn't have as much entropy (randomness) as a cryptographic random generator.
+
+### What Makes a Password **Truly Random**?
+#   A truly random password is generated using a **cryptographically secure random number generator (CSPRNG)**, which ensures unpredictability and is suitable for security-critical applications.
+
+#   For example, in Linux:
+# `/dev/urandom` or `/dev/random` can provide cryptographically secure random bytes.
+# Tools like `openssl` or Python can use secure random functions.
+
+### Enhancing the Script for Cryptographic Randomness
+#   You can replace `$RANDOM` with `tr` and `/dev/urandom` for a more secure implementation:
+
+generate_password() {
+    local length="$1"
+    local use_upper="$2"
+    local use_lower="$3"
+    local use_numbers="$4"
+    local use_special="$5"
+
+    local char_set=""
+
+    [ "$use_upper" == "y" ] && char_set+="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    [ "$use_lower" == "y" ] && char_set+="abcdefghijklmnopqrstuvwxyz"
+    [ "$use_numbers" == "y" ] && char_set+="0123456789"
+    [ "$use_special" == "y" ] && char_set+="!@#$%^&*()-_=+[]{}|;:,.<>?/"
+
+    if [ -z "$char_set" ]; then
+        echo "No character sets selected! Cannot generate a password."
+        return 1
+    fi
+
+    # Generate password using /dev/urandom
+    password=$(tr -dc "$char_set" < /dev/urandom | head -c "$length")
+    echo "Generated Password: $password"
+}
+
+### How This is Better:
+#   1. **Truly Random Source**:
+#   `/dev/urandom` pulls from a pool of entropy collected from the system, making it much more secure and unpredictable than `$RANDOM`.
+
+#   2. **High Entropy**:
+#   Each character is selected from the full range of the character set, and the selection process is cryptographically secure.

@@ -75,3 +75,17 @@ fi
 
 #   "tail -f /var/log/updater.log" command will show the progress of the update script
 #   "tail -f /var/log/updater_errors.log" command will show the errors of the update script
+
+
+
+
+
+#   3rd data stream is standard input, aka stdin, it is used to take input from the user
+
+#!bin/bash
+
+echo "Please enter your name:"
+
+read myname
+
+echo "Your name is $myname."
