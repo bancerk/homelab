@@ -50,3 +50,23 @@ print("This will always print.")
 #   keep in mind that if statements shouldn't be used to check for user error
 #   for example if user inputs a text instead, if statement will break
 
+
+
+#   lets make an else if statement example
+
+age = input("Please enter your age: ")
+
+if int(age) >= 50:
+    print("You are 50 or older.")
+elif int(age) >= 25:
+    print("You are 25 or older.")
+elif int(age) >= 18:
+    print("You are an adult.")
+else:
+    print("You are not even an adult.")
+print("This will always print")
+
+#   there can only be one else statement, but you can use as many elif statements as you want
+#   script runs from top to bottom
+#   meaning, if elif statements were reversed in order and 18-check was higher,
+#   and if user had inputted 38, then 18-check would print because it reaches true statement before any other checks
