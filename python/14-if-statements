@@ -1,0 +1,52 @@
+#!/bin/python3
+
+number = 5
+
+if number < 10:
+    print("the number is less than 10.")
+print("This will always print.")
+
+#   if statement checks if "number" integer is less than 10
+#   since we set the number to 5, if statement is true, therefore print command under the if statement will run
+#   but also second print command will also run because it is not tied to if statement yet
+
+#   let's ask the user for a variable instead
+
+number = input("Please enter a number: ")
+
+if number < 10:
+    print("the number is less than 10.")
+print("This will always print.")
+
+#   this statement will fail because user input is taken but it is not an integer.
+
+number = input("Please enter a number: ")
+
+if int(number) < 10:
+    print("the number is less than 10.")
+print("This will always print.")
+
+#   if user inputs an number higher than 10, only second print line will run.
+
+
+number = input("Please enter a number between 1-10: ")
+
+if int(number) <= 10:
+    print("A valid number was entered.")
+print("This will always print.")
+
+
+
+#   let's add what will happen if the user enters an invalid input, with else
+
+number = input("Please enter a number between 1-10: ")
+
+if int(number) <= 10:
+    print("A valid number was entered.")
+else:
+    print("An invalid number was entered.")
+print("This will always print.")
+
+#   keep in mind that if statements shouldn't be used to check for user error
+#   for example if user inputs a text instead, if statement will break
+
