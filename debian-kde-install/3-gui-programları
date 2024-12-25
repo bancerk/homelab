@@ -5,6 +5,10 @@ $ sudo nano /etc/apt/sources.list
 deb ........ ve deb-src ....... sonuna ekle
 non-free-firmware contrib non-free
 
+sonuna ekle
+
+deb http://deb.debian.org/debian bookworm-backports main
+
 $ sudo apt update && sudo apt upgrade
 $ sudo apt install tldr timeshift btop grsync nvtop steam-installer gamemode piper fonts-quicksand fonts-ubuntu
 
