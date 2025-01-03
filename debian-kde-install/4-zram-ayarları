@@ -1,9 +1,0 @@
-$ sudo nano /etc/systemd/zram-generator.conf
-
-[zram0]
-zram-size = 8192
-compression-algorithm = zstd
-
-$ sudo systemctl daemon-reload
-$ sudo systemctl start /dev/zram0
-$ sudo zramctl --output-all

@@ -1,8 +1,0 @@
-$ sudo apt update
-$ sudo apt install plasma-desktop sddm dolphin firefox-esr konsole
-$ sudo systemctl set-default graphical.target
-$ sudo systemctl enable fstrim.timer
-$ sudo systemctl start fstrim.timer
-$ sudo dpkg --add-architecture i386
-
-Reboot
