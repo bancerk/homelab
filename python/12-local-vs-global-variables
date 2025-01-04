@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/python3
 
 def my_function():
     """This is a sample function.
