@@ -1,0 +1,54 @@
+(*)boolean
+size        1 bit
+value type  primitive
+value       true or false
+
+byte
+size        1 byte
+value type  primitive
+value       -127 to 127
+
+short
+size        2 bytes
+value type  primitive
+value       -32768 to 32767
+
+(*)int
+size        4 bytes
+value type  primitive
+value       -2 billion to 2 billion
+
+long
+size        8 bytes
+value type  primitive
+value       -9 quintillion to 9 quintillion
+
+float
+size        4 bytes
+value type  primitive
+value       fractional number up to 6-7 digits ex. 3.141592f
+
+(*)double
+size        8 bytes
+value type  primitive
+value       fractional number up to 15 digits ex. 3.141592653589793
+
+(*)char
+size        2 bytes
+value type  primitive
+value       single character/letter/ASCII value ex. 'f'
+
+(*)String
+size        varies
+value type  reference
+value       a sequence of characters ex. "Hello World!"
+
+
+primitive vs reference
+
+Primitive                               Reference
+8 types (boolean,byte,etc)              unlimited (user defined)
+stores data                             stores an address
+can only hold 1 value                   could hold more than 1 value
+uses less memory                        uses more memory
+fast                                    slower
