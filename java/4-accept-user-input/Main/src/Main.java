@@ -25,5 +25,7 @@ public class Main {
 
     System.out.println("Your favorite food is " + food + ".");
 
+    scanner.close();
+
     }
 }
